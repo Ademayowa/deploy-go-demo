@@ -7,11 +7,9 @@ import (
 )
 
 type Property struct {
-	ID          string  `json:"id"`
-	Title       string  `json:"title"`
-	Description string  `json:"description"`
-	Location    string  `json:"location"`
-	Amount      float64 `json:"amount"`
+	ID       string `json:"id"`
+	Title    string `json:"title"`
+	Location string `json:"location"`
 }
 
 // Save property into the database
@@ -19,8 +17,8 @@ func (property *Property) Save() error {
 	property.ID = uuid.New().String()
 
 	query := `
-		INSERT INTO properties(id, title, description, location, amount)
-		VALUES(?, ?, ?, ?, ?)
+		INSERT INTO properties(id, title, location)
+		VALUES(?, ?, ?)
 	`
 
 	stmt, err := db.DB.Prepare(query)
@@ -29,13 +27,7 @@ func (property *Property) Save() error {
 	}
 	defer stmt.Close()
 
-	_, err = stmt.Exec(
-		property.ID,
-		property.Title,
-		property.Description,
-		property.Location,
-		property.Amount,
-	)
+	_, err = stmt.Exec(property.ID, property.Title, property.Location)
 	return err
 }
 
@@ -54,13 +46,7 @@ func GetAllProperties() ([]Property, error) {
 
 	for rows.Next() {
 		var property Property
-		err := rows.Scan(
-			&property.ID,
-			&property.Title,
-			&property.Description,
-			&property.Location,
-			&property.Amount,
-		)
+		err := rows.Scan(&property.ID, &property.Title, &property.Location)
 		if err != nil {
 			return nil, err
 		}
@@ -77,13 +63,7 @@ func GetPropertyByID(id string) (Property, error) {
 
 	query := "SELECT * FROM properties WHERE id =?"
 	row := db.DB.QueryRow(query, id)
-	err := row.Scan(
-		&property.ID,
-		&property.Title,
-		&property.Description,
-		&property.Location,
-		&property.Amount,
-	)
+	err := row.Scan(&property.ID, &property.Title, &property.Location)
 	if err != nil {
 		return property, err
 	}
@@ -109,15 +89,9 @@ func (property Property) Delete() error {
 func UpdateProperty(id string, updatedProperty Property) error {
 	query := `
 		UPDATE properties
-		SET title = ?, description = ?, location = ?, amount = ?
+		SET title = ?, location = ?
 		WHERE id = ?
 	`
-	_, err := db.DB.Exec(query,
-		updatedProperty.Title,
-		updatedProperty.Description,
-		updatedProperty.Location,
-		updatedProperty.Amount,
-		id,
-	)
+	_, err := db.DB.Exec(query, updatedProperty.Title, updatedProperty.Location, id)
 	return err
 }

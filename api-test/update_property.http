@@ -1,9 +1,7 @@
-PUT http://localhost:8080/properties/be6a405b-8402-44ae-b3dd-05b402376fc3
+PUT http://localhost:8080/properties/1d927105-98e0-4f19-adf2-d9208e668e44
 content-type: application/json
 
 {
   "title": "Duplex for sale",
-  "description": "Duplex for sale in London",
-  "location": "London, UK",
-  "amount": 1000000
+  "location": "London, UK"
 }

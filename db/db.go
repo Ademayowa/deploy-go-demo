@@ -27,9 +27,7 @@ func createTable() {
 	CREATE TABLE IF NOT EXISTS properties (
 		id TEXT PRIMARY KEY,
 		title TEXT NOT NULL,
-    description TEXT NOT NULL,
-		location TEXT NOT NULL,
-		amount FLOAT NOT NULL
+		location TEXT NOT NULL
 	)
 	`
 	_, err := DB.Exec(createPropertiesTable)

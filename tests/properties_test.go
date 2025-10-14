@@ -24,7 +24,7 @@ func TestCreateProperty(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)
-	c.Request = httptest.NewRequest("POST", "/", bytes.NewBufferString(`{"title":"2 bedroom for rent","description":"2 bedroom for rent in London","location":"London, UK","amount":4000}`))
+	c.Request = httptest.NewRequest("POST", "/", bytes.NewBufferString(`{"title":"2 bedroom for rent","location":"UK"}`))
 	c.Request.Header.Set("Content-Type", "application/json")
 
 	routes.CreateProperty(c)
@@ -40,8 +40,8 @@ func TestGetProperties(t *testing.T) {
 	defer mockDB.Close()
 	db.DB = mockDB
 
-	rows := sqlmock.NewRows([]string{"id", "title", "description", "location", "amount"}).
-		AddRow("1", "Test", "Desc", "Loc", 100)
+	rows := sqlmock.NewRows([]string{"id", "title", "location"}).
+		AddRow("1", "Test", "Loc")
 	mock.ExpectQuery("SELECT (.+) FROM properties").WillReturnRows(rows)
 
 	gin.SetMode(gin.TestMode)
@@ -62,8 +62,8 @@ func TestGetProperty(t *testing.T) {
 	defer mockDB.Close()
 	db.DB = mockDB
 
-	rows := sqlmock.NewRows([]string{"id", "title", "description", "location", "amount"}).
-		AddRow("1", "Test", "Desc", "Loc", 100)
+	rows := sqlmock.NewRows([]string{"id", "title", "location"}).
+		AddRow("1", "Test", "Loc")
 	mock.ExpectQuery("SELECT (.+) FROM properties WHERE id").WillReturnRows(rows)
 
 	gin.SetMode(gin.TestMode)
@@ -85,8 +85,8 @@ func TestDeleteProperty(t *testing.T) {
 	defer mockDB.Close()
 	db.DB = mockDB
 
-	rows := sqlmock.NewRows([]string{"id", "title", "description", "location", "amount"}).
-		AddRow("1", "Test", "Desc", "Loc", 100)
+	rows := sqlmock.NewRows([]string{"id", "title", "location"}).
+		AddRow("1", "Test", "Loc")
 	mock.ExpectQuery("SELECT (.+) FROM properties WHERE id").WillReturnRows(rows)
 	mock.ExpectPrepare("DELETE FROM properties").ExpectExec().WillReturnResult(sqlmock.NewResult(0, 1))
 
@@ -115,7 +115,7 @@ func TestUpdateProperty(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)
 	c.Params = gin.Params{{Key: "id", Value: "1"}}
-	c.Request = httptest.NewRequest("PUT", "/1", bytes.NewBufferString(`{"title":"Updated","description":"Desc","location":"Loc","amount":200}`))
+	c.Request = httptest.NewRequest("PUT", "/1", bytes.NewBufferString(`{"title":"Updated","location":"Loc"}`))
 	c.Request.Header.Set("Content-Type", "application/json")
 
 	routes.UpdateProperty(c)
