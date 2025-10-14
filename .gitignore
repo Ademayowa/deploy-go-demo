@@ -77,4 +77,4 @@ __pycache__/
 /go/pkg/mod/
 
 # API test directory
-/api-endpoint/
+/api-test/
