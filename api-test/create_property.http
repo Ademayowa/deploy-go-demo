@@ -1,0 +1,9 @@
+POST http://localhost:8080/properties
+content-type: application/json
+
+{
+  "title": "2 bedroom apartment for rent",
+  "description": "2 bedroom apartment for rent in London",
+  "location": "London, UK",
+  "amount": 4000
+}

@@ -1,0 +1,3 @@
+DELETE http://localhost:8080/properties/be6a405b-8402-44ae-b3dd-05b402376fc3
+content-type: application/json
+
