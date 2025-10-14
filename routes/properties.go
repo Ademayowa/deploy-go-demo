@@ -8,7 +8,7 @@ import (
 )
 
 // Create a property
-func createProperty(context *gin.Context) {
+func CreateProperty(context *gin.Context) {
 	var property models.Property
 
 	err := context.ShouldBindJSON(&property)
@@ -22,7 +22,7 @@ func createProperty(context *gin.Context) {
 }
 
 // Fetch all properties
-func getProperties(context *gin.Context) {
+func GetProperties(context *gin.Context) {
 
 	// Get all properties
 	properties, err := models.GetAllProperties()
@@ -35,7 +35,7 @@ func getProperties(context *gin.Context) {
 }
 
 // Fetch single property
-func getProperty(context *gin.Context) {
+func GetProperty(context *gin.Context) {
 	propertyID := context.Param("id")
 
 	property, err := models.GetPropertyByID(propertyID)
@@ -48,7 +48,7 @@ func getProperty(context *gin.Context) {
 }
 
 // Delete property
-func deleteProperty(context *gin.Context) {
+func DeleteProperty(context *gin.Context) {
 	propertyID := context.Param("id")
 
 	property, err := models.GetPropertyByID(propertyID)
@@ -67,7 +67,7 @@ func deleteProperty(context *gin.Context) {
 }
 
 // Update property
-func updateProperty(context *gin.Context) {
+func UpdateProperty(context *gin.Context) {
 	// Extract property ID from the URL
 	propertyID := context.Param("id")
 

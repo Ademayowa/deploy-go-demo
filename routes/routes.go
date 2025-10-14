@@ -6,9 +6,9 @@ import (
 
 func RegisterRoutes(router *gin.Engine) {
 	// Define routes
-	router.POST("/properties", createProperty)
-	router.GET("/properties", getProperties)
-	router.GET("/properties/:id", getProperty)
-	router.DELETE("/properties/:id", deleteProperty)
-	router.PUT("/properties/:id", updateProperty)
+	router.POST("/properties", CreateProperty)
+	router.GET("/properties", GetProperties)
+	router.GET("/properties/:id", GetProperty)
+	router.DELETE("/properties/:id", DeleteProperty)
+	router.PUT("/properties/:id", UpdateProperty)
 }
