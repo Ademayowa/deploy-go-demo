@@ -29,6 +29,12 @@ go mod download
 go run main.go
 ```
 
+4. Running Tests:
+
+```bash
+make test
+```
+
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details
