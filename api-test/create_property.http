@@ -2,6 +2,6 @@ POST http://localhost:8080/properties
 content-type: application/json
 
 {
-  "title": "3 bedroom apartment for rent",
-  "location": "Portugal"
+  "title": "5 bedroom apartment for rent",
+  "location": "Nigeria"
 }
