@@ -32,7 +32,9 @@ jobs:
       - go/save-cache
       - run:
           name: Build application
-          command: go build -o bin/app ./...
+          command: |
+            mkdir -p bin
+            go build -o bin/app .
       - run:
           name: Verify build
           command: ls -lh bin/
